@@ -1,5 +1,5 @@
 """
-ASGI config for cats_or_dogs_recoginzer project.
+ASGI config for main project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
