@@ -6,6 +6,7 @@ Brotli==1.1.0
 cachetools==5.3.3
 certifi==2024.2.2
 charset-normalizer==3.3.2
+click==8.1.7
 decorator==5.1.1
 dj-database-url==2.1.0
 Django==5.0.3
@@ -17,6 +18,8 @@ google-auth==2.29.0
 google-auth-oauthlib==1.2.0
 google-pasta==0.2.0
 grpcio @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_f0it_w9tlw/croot/grpc-suite_1681912595383/work
+gunicorn==21.2.0
+h11==0.14.0
 h5py==3.10.0
 idna==3.6
 ipython==8.22.2
@@ -69,6 +72,7 @@ traitlets==5.14.2
 typing_extensions==4.10.0
 tzdata==2024.1
 urllib3==2.2.1
+uvicorn==0.29.0
 wcwidth==0.2.13
 Werkzeug==3.0.1
 whitenoise==6.6.0
