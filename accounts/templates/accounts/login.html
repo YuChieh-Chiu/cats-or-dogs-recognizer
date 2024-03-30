@@ -1,0 +1,101 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cat Or Dog</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'style.css' %}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="container p-relative d-flex justify-content-between">
+                <div class="website-title open-sans-extrabold align-items-center">貓狗照片辨識</div>
+            </div>
+        </nav>
+        <header class="header">
+            <div class="container p-relative">
+                <img src="{% static 'cute-cat-laying-floor.png' %}" class="p-absolute img-brightness z-index--2 pos-3d" data-layer="13" data-invert="0" width="900" height="600" style="left: 0px; top: 250px" alt />
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        <div class="header-content">
+                            <form class="login-form d-grid gap-4" action="" method="POST">
+                                <h3>歡迎使用本服務</h3>
+                                {% csrf_token %}
+                                {{ form }}
+                                <input class="btn btn-primary" type="submit" value="登入" />
+                            </form>
+                        </div>        
+                    </div>
+                </div>
+                <img src="{% static 'cute-golden-retriever.png' %}" class="p-absolute img-brightness z-index--1 pos-3d" data-layer="7" data-invert="1" width="625" height="938" style="right: 0px; top: 100px" alt />
+            </div>
+            {% comment %} <div class="container p-relative">
+                <img src="{% static 'cute-cat-laying-floor.png' %}" class="p-absolute z-index--2 pos-3d" data-layer="13" data-invert="0" width="900" height="600" style="left: 0px; top: 400px" alt />
+                <div class="login-frame col-md-4 offset-md-4">
+                    <form class="d-grid gap-4" action="" method="POST">
+                        <h3>歡迎使用本服務</h3>
+                        {% csrf_token %}
+                        {{ form }}
+                        <input class="btn btn-primary" type="submit" value="登入" />
+                    </form>        
+                </div>
+                <div class="col-md-5 offset-md-7">
+                    <img src="{% static 'cute-golden-retriever.png' %}" class="pet-image z-index--1 pos-3d" data-layer="7" data-invert="1" width="625" height="938" alt />
+                </div>
+            </div> {% endcomment %}
+        </header>
+        <section class="section">
+            <span class="copyright noto-sans-light">copyright @ jackchiu 2024.03</span>
+        </section>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                document.addEventListener('mousemove', (e) => {
+                    //傳入滑鼠位置
+                    document.querySelectorAll('.pos-3d').forEach((element) => {
+                        add3d(element, e);
+                });
+              });
+            });
+            function add3d(element, e) {
+                // 滑鼠位置
+                const m_x = e.pageX;
+                const m_y = e.pageY;
+        
+                const w_w = window.innerWidth,
+                    w_h = window.innerHeight,
+                    o_w = element.offsetWidth,
+                    distance = (element.offsetWidth - w_w) / 2,
+                    layer = Number(element.getAttribute('data-layer')),
+                    invert = Number(element.getAttribute('data-invert'));
+      
+                // 物件在頁面上的位置
+                const o_x = w_w / 2;
+                const o_y = w_h / 2;
+      
+                // 兩者的距離差
+                let w_x = m_x - o_x;
+                let w_y = m_y - o_y;
+      
+                // 距離相乘後開平方
+                const w_wSqrt = Math.sqrt(w_w / 2);
+                const d = distance / w_wSqrt / layer;
+      
+                // 距離計算
+                let s_x = Math.sqrt(Math.abs(w_x));
+                if (w_x < 0) {
+                    s_x = -s_x;
+                }
+        
+                let d_x = s_x * d;
+                // 加入樣式
+                element.style.transform = `translateX(${invert ? d_x : -d_x}px)`;
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    </body>
+</html>

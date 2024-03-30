@@ -1,0 +1,175 @@
+/* 網頁整體 */
+.open-sans-extrabold {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 800;
+}
+  
+.noto-sans-light {
+    font-family: "Noto Sans TC", sans-serif;
+    font-weight: 300;
+}
+  
+.noto-sans-black {
+    font-family: "Noto Sans TC", sans-serif;
+    font-weight: 900;
+}
+  
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+  
+body {
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-image: linear-gradient(to bottom, #fff, #E9E9E9);
+}
+  
+/* Boostrap 容器 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* navbar */
+.website-title {
+    font-size: 36px;
+}
+  
+.navbar {
+    background-color: rgba(255, 255, 255, 0.3);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+  
+.navbar .navbar-list {
+    display: flex;
+    align-items: center;
+}
+
+.navbar .list-item {
+    display: inline-block;
+    padding: 1.5rem 1rem;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.15s ease-in-out;
+}
+
+.navbar .list-item:hover, .navbar .list-item.active {
+    color: #ff7a00;
+}
+
+/* header */
+.header {
+    overflow:hidden;
+}
+
+.header .header-content {
+    padding-top: 244px;
+    padding-bottom: 244px;
+}
+
+.header .upload-file {
+    padding-top: 244px;
+    padding-bottom: 244px;
+}
+
+.pet-image {
+    padding-top:100px;
+}
+
+.display-h1 {
+    font-size: 60px;
+    line-height: 1.2;
+}
+
+.d-inline-block {
+    display: inline-block;
+}
+
+/* section */
+.section {
+    padding: 16px 0;
+    background-color:#ddd
+}
+
+.copyright {
+    display: inline-block;
+    text-align: center;
+    padding-left: 45%;
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+}
+
+/* 可能會重複使用到的元件 */
+.p-relative {
+    position: relative;
+}
+  
+.p-absolute {
+    position: absolute;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 36px;
+    text-decoration: none;
+    color: #fff;
+    background-image: linear-gradient(to bottom, #ff7a00, #ff9900);
+    box-shadow: #f90 0 0 0;
+    transition:box-shadow .15s ease-in-out;
+}
+
+.btn:hover {
+    color: #fff;
+    background-image: linear-gradient(to bottom, #ff7a00, #ff9900);
+    box-shadow:#f90 5px 5px 15px;
+}
+
+.px-60 {
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.z-index--1 {
+    z-index: -1;
+}
+
+.z-index--2 {
+    z-index: -2;
+}
+
+.type-blink {
+    width: 3px;
+    height: 68px;
+    background-image: linear-gradient(to bottom, #3586ff, rgba(0, 101, 252, 0.5));
+    position: absolute;
+    right: -10px;
+    top: 28%;
+    transform: translateY(-50%);
+    animation:blink 1s infinite
+}

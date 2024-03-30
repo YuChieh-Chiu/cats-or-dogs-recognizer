@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="container p-relative">
+    <img src="{% static 'cute-cat-laying-floor.png' %}" class="p-absolute z-index--2 pos-3d" data-layer="13" data-invert="0" width="900" height="600" style="left: 0px; top: 400px" alt />
+    <div class="row">
+        <div class="col-md-5">
+            <div class="header-content">
+                <h1 class="display-h1 noto-sans-light mb-24 d-inline-block p-relative">
+                上傳你的
+                <span class="noto-sans-black typing-effect" id="typing">貓咪</span>
+                <span class="type-blink"></span>
+                <br>
+                照片試試吧！
+                </h1>
+                <p class="text-dark-gray mb-0 noto-sans-light">
+                本網頁會使用作者訓練的模型，對您上傳的貓咪或狗狗照片進行識別，猜猜看照片中是貓咪還是狗狗。
+                <br>
+                - 點擊 <b>🔎 Recognize</b> 可以上傳您的照片進行識別
+                <br>
+                - 點擊 <b>📊 History & Metrics</b> 可以瀏覽照片識別歷史紀錄及模型效果
+                <br>
+                - 點擊 <b>🏠 Homepage</b> 則會回到此頁面
+                </p>
+                <br>
+                <a href="{% url 'recognize' %}">
+                    <button type="button" class="btn btn-primary px-60">
+                        開始使用
+                    </button>                        
+                </a>
+            </div>
+        </div>
+        <div class="col-md-5 offset-md-1">
+            <img src="{% static 'cute-golden-retriever.png' %}" class="pet-image z-index--1 pos-3d" data-layer="7" data-invert="1" width="625" height="938" alt />
+        </div>
+    </div>
+</div>
+{% endblock %}

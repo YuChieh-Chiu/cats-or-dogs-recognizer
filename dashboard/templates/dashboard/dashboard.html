@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="container p-relative">
+    <div class="row">
+        <div class="col">
+            <div class="dashboard-header">
+                <h5 class="noto-sans-black">預測指標</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-bottom: 10px;">
+        <div class="col-md-3">
+            <div class="cards widget">
+                <div class="d-flex flex-wrap">
+                    <div class="widget-data">
+                        <div class="noto-sans-black card-font-size">
+                            {{ precision_of_dogs }}%
+                        </div>
+                        <div class="noto-sans-light">
+                            狗狗精確率
+                            <br>
+                            (Precision of Dogs)
+                            {% comment %} （r狗/p狗） {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon" data-color="#00eccf">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="cards widget">
+                <div class="d-flex flex-wrap">
+                    <div class="widget-data">
+                        <div class="noto-sans-black card-font-size">
+                            {{ recall_of_dogs }}%
+                        </div>
+                        <div class="noto-sans-light">
+                            狗狗召回率
+                            <br>
+                            (Recall of Dogs)
+                            {% comment %} （p狗/r狗） {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon" data-color="#00eccf">
+                            <i class="bi bi-bootstrap-reboot"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="cards widget">
+                <div class="d-flex flex-wrap">
+                    <div class="widget-data">
+                        <div class="noto-sans-black card-font-size">
+                            {{ precision_of_cats }}%
+                        </div>
+                        <div class="noto-sans-light">
+                            貓咪精確率
+                            <br>
+                            (Precision of Cats)
+                            {% comment %} （r貓/p貓） {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon" data-color="#00eccf">
+                            <i class="bi bi-check2-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="cards widget">
+                <div class="d-flex flex-wrap">
+                    <div class="widget-data">
+                        <div class="noto-sans-black card-font-size">
+                            {{ recall_of_cats }}%
+                        </div>
+                        <div class="noto-sans-light">
+                            貓咪召回率
+                            <br>
+                            (Recall of Cats)
+                            {% comment %} （p貓/r貓） {% endcomment %}
+                        </div>
+                    </div>
+                    <div class="widget-icon">
+                        <div class="icon" data-color="#00eccf">
+                            <i class="bi bi-bootstrap-reboot"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-history">
+        <div class="card" style="padding-top: 20px;">
+            <div class="h5 noto-sans-black" style="padding: 20px;">歷史紀錄</div>
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>＃</th>
+                        <th>圖片檔名</th>
+                        <th>圖片縮圖</th>
+                        <th>猜測動物</th>
+                        <th>實際動物</th>
+                        <th>正確/錯誤</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for photo in photos %}
+                    <tr class="vertical-center">
+                        <td>{{ photo.id }}</td>
+                        <td>{{ photo.image }}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                    src="{{ photo.image.url }}"
+                                    class="shadow"
+                                    height="50"
+                                    alt=""
+                                />
+                            </div>
+                        </td>
+                        <td>{{ photo.prediction }}</td>
+                        <td>{{ photo.real }}</td>
+                        <td>
+                            {% if photo.correct == 1 %}
+                                <i class="bi bi-check-circle-fill" style="color: #99B83C;"></i>
+                            {% elif photo.correct == 0 %}
+                                <i class="bi bi-x-circle-fill" style="color: #E05A47;"></i>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% comment %} <tr class="vertical-center">
+                        <td>1</td>
+                        <td>cute-cat-laying-floor.png</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                    src="{% static 'cute-cat-laying-floor.png' %}"
+                                    class="shadow"
+                                    height="50"
+                                    alt=""
+                                />
+                            </div>
+                        </td>
+                        <td>貓咪</td>
+                        <td>貓咪</td>
+                        <td>
+                            <i class="bi bi-check-circle-fill"></i>
+                        </td>
+                    </tr>
+                    <tr class="vertical-center">
+                        <td>2</td>
+                        <td>cute-cat-laying-floor.png</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img
+                                    src="{% static 'cute-cat-laying-floor.png' %}"
+                                    class="shadow"
+                                    height="50"
+                                    alt=""
+                                />
+                            </div>
+                        </td>
+                        <td>貓咪</td>
+                        <td>狗勾</td>
+                        <td>
+                            <i class="bi bi-x-circle-fill"></i>
+                        </td>
+                    </tr> {% endcomment %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
