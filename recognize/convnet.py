@@ -6,8 +6,6 @@ import pandas as pd
 import numpy as np
 # USE FOR DATA PATH & VERBOSE
 import os, warnings
-# USE FOR DATA VISUALIZED
-from IPython.display import display, Markdown
 # USE FOR MODEL BUILT
 import numpy as np
 import tensorflow as tf
@@ -119,8 +117,6 @@ class convnets:
         return history_frame
     def plot(self,
              history_frame: pd.DataFrame) -> None:
-        ptitle = "<br><p style='color:#808000;font-size:14px;font-family:bold;'>model training process</p>"
-        display(Markdown(ptitle))
         history_frame.loc[:, ["loss", "val_loss"]].plot()
         history_frame.loc[:, ["binary_accuracy", "val_binary_accuracy"]].plot()
     def save_model(self) -> None:
@@ -130,8 +126,6 @@ class convnets:
             json_file.write(model_json)
         # SERIALIZE WEIGHTS TO HDF
         self.model.save_weights("model_weights.h5")
-        save_msg = f"<p style='color:#6B8E23;font-size:14px;'>model & weights are saved !!!</p>"        
-        display(Markdown(save_msg))
     def predict(self,
                 test_x,
                 model_path: str=model_path) -> str:
@@ -146,8 +140,6 @@ class convnets:
         print(pred_id)
         id2label = {1: "狗狗", 0: "貓咪"} #  SORT BY ALPHABET
         pred = id2label[pred_id[0]]
-        preds_result = f"<p style='color:#6B8E23;font-size:14px;'>model predictions : {pred}</p>"        
-        display(Markdown(preds_result))
         return pred
     
 # ### EXECUTE CODE
