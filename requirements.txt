@@ -3,3 +3,4 @@ django==5.0.3
 pillow==10.2.0
 opencv-python==4.9.0.80
 pandas==2.2.1
+gunicorn==21.2.0
