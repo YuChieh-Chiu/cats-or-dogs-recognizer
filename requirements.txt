@@ -17,7 +17,6 @@ gast==0.5.4
 google-auth==2.29.0
 google-auth-oauthlib==1.2.0
 google-pasta==0.2.0
-grpcio @ file:///private/var/folders/nz/j6p8yfhx1mv_0grj5xl4650h0000gp/T/abs_f0it_w9tlw/croot/grpc-suite_1681912595383/work
 gunicorn==21.2.0
 h11==0.14.0
 h5py==3.10.0
@@ -57,7 +56,6 @@ requests==2.31.0
 requests-oauthlib==2.0.0
 rich==13.7.1
 rsa==4.9
-six @ file:///tmp/build/80754af9/six_1644875935023/work
 sqlparse==0.4.4
 stack-data==0.6.3
 tensorboard==2.15.2
