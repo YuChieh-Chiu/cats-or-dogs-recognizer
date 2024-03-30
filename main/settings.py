@@ -79,10 +79,7 @@ WSGI_APPLICATION = "main.wsgi.application"
 
 DATABASES = {
     "default": {
-        dj_database_url.config(
-            'postgresql://postgres:postgres@localhost:5432/recognizer',
-            conn_max_age=600    
-    )
+        dj_database_url.config()
     }
 }
 
