@@ -40,9 +40,6 @@ def preprocess_test_data(test_data_path: str) -> pd.DataFrame:
     # RESHAPE FROM DATAFRAME TO 3-D MATRIX
     data_x = df.values[:, :]
     height = width = int(pow(data_x.shape[1], 0.5))
-    # KERAS DEFAULT MAXPOOLINGOP ONLY SUPPORTS `NHWC` ON DEVICE TYPE CPU
-    # NHWC = (n_samples, height, width, channels)
-    data_x = data_x.reshape(data_x.shape[0], height, width, 1).astype("float32")
     # NORMALIZE DATA FROM [0, 255] TO [0, 1]
     data_x = data_x / 255.0
     return data_x
@@ -73,7 +70,7 @@ class convnets:
                 model_path: str=model_path) -> str:
         # LOAD PRETRAINED MODEL，LOADING KERAS IS BETTER
         loaded_model = keras.models.load_model(os.path.join(model_path, "model.keras"))
-        # load weights into new model
+        # LOAD WEIGHTS INTO NEW MODEL
         loaded_model.load_weights(os.path.join(model_path, "model_weights.h5"))
         # GET MODEL PREDICTIONS
         prediction = loaded_model.predict(test_x)
