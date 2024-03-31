@@ -61,65 +61,6 @@ class convnets:
         self.valid_x = valid_x
         self.valid_y = valid_y
         self.CATEGORIES = len(self.train_y[0])
-    # def model(self) -> None:
-    #     backend.set_image_data_format("channels_first")
-    #     model = keras.Sequential([
-    #         # input layer
-    #         layers.InputLayer(input_shape=(1, 28, 28)),
-    #         # data augmentation
-    #         layers.experimental.preprocessing.RandomFlip(mode="horizontal"),
-    #         layers.experimental.preprocessing.RandomRotation(factor=0.10),
-    #         # base - block one
-    #         layers.BatchNormalization(renorm=True),
-    #         layers.Conv2D(filters=40, 
-    #                       kernel_size=5, 
-    #                       activation="relu", 
-    #                       padding="same"),
-    #         layers.MaxPool2D(),
-    #         # base - block two
-    #         layers.BatchNormalization(renorm=True),
-    #         layers.Conv2D(filters=60,
-    #                       kernel_size=5,
-    #                       activation="relu",
-    #                       padding="same"),
-    #         layers.MaxPool2D(),
-    #         # base - block three
-    #         layers.BatchNormalization(renorm=True),
-    #         layers.Conv2D(filters=80,
-    #                       kernel_size=5,
-    #                       activation="relu",
-    #                       padding="same"),
-    #         layers.MaxPool2D(),
-    #         # head
-    #         layers.BatchNormalization(renorm=True),
-    #         layers.Dropout(0.1),
-    #         layers.Flatten(),
-    #         layers.Dense(units=40,
-    #                      activation="relu"),
-    #         layers.Dropout(0.1),
-    #         layers.Dense(units=self.CATEGORIES,
-    #                      activation="sigmoid")
-    #     ])
-    #     model.compile(loss="binary_crossentropy",
-    #                   optimizer="adam",
-    #                   metrics=["binary_accuracy"])
-    #     summary = "<br><p style='color:#808000;font-size:14px;font-family:bold;'>model structure</p>"
-    #     display(Markdown(summary))
-    #     display(model.summary())
-    #     return model
-    def train(self) -> pd.DataFrame:
-        self.model = self.model()
-        history = self.model.fit(self.train_x,
-                          self.train_y,
-                          validation_data=(self.valid_x, self.valid_y),
-                          batch_size=300,
-                          epochs=50)
-        history_frame = pd.DataFrame(history.history)
-        return history_frame
-    def plot(self,
-             history_frame: pd.DataFrame) -> None:
-        history_frame.loc[:, ["loss", "val_loss"]].plot()
-        history_frame.loc[:, ["binary_accuracy", "val_binary_accuracy"]].plot()
     def save_model(self) -> None:
         # SERIALIZE（序列化）MODEL TO JSON
         model_json = self.model.to_json()
@@ -142,11 +83,3 @@ class convnets:
         id2label = {1: "狗狗", 0: "貓咪"} #  SORT BY ALPHABET
         pred = id2label[pred_id[0]]
         return pred
-    
-# ### EXECUTE CODE
-# cats_and_dogs_recognizer = convnets(train_x, train_y, valid_x, valid_y)
-# test_x = preprocess_test_data()
-# if test_x is None:
-#     pred = "no prediction."
-# else:
-#     pred = cats_and_dogs_recognizer.predict(test_x)
