@@ -1,8 +1,8 @@
 databases:
   - name: cats-or-dogs-recognizer-db
     plan: free
-    databaseName: cats-or-dogs-recognizer
-    user: cats-or-dogs-recognizer
+    databaseName: cats_or_dogs_recognizer
+    user: cats_or_dogs_recognizer
 
 services:
   - type: web
