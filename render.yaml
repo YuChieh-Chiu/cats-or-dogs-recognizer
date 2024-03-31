@@ -1,5 +1,5 @@
 databases:
-  - name: cats-or-dogs-recognizer-db
+  - name: cats_or_dogs_recognizer_db
     plan: free
     databaseName: cats_or_dogs_recognizer
     user: cats_or_dogs_recognizer
@@ -7,14 +7,14 @@ databases:
 services:
   - type: web
     plan: free
-    name: cats-or-dogs-recognizer
+    name: cats_or_dogs_recognizer
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "python -m gunicorn main.asgi:application -k uvicorn.workers.UvicornWorker"    
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: cats-or-dogs-recognizer-db
+          name: cats_or_dogs_recognizer_db
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
