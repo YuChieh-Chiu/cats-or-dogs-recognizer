@@ -40,13 +40,14 @@ def preprocess_test_data(test_data_path: str) -> pd.DataFrame:
     # RESHAPE FROM DATAFRAME TO 3-D MATRIX
     data_x = df.values[:, :]
     height = width = int(pow(data_x.shape[1], 0.5))
-    data_x = data_x.reshape(data_x.shape[0], 1, height, width).astype("float32")
+    # KERAS DEFAULT MAXPOOLINGOP ONLY SUPPORTS `NHWC` ON DEVICE TYPE CPU
+    # NHWC = (n_samples, height, width, channels)
+    data_x = data_x.reshape(data_x.shape[0], height, width, 1).astype("float32")
     # NORMALIZE DATA FROM [0, 255] TO [0, 1]
     data_x = data_x / 255.0
     return data_x
 
-# 重要：save & load model 的版本一定要一致，才不會有一大堆問題＝＝
-# 重要：在虛擬環境 venv_recognizer 中執行
+### save & load model 的版本一定要一致
 ### BUILD CONVNETS
 # DEFINE CLASS : BUILD CONVNETS
 class convnets:
