@@ -42,8 +42,9 @@ def preprocess_test_data(test_data_path: str) -> pd.DataFrame:
     height = width = int(pow(data_x.shape[1], 0.5))
     data_x = data_x.reshape(data_x.shape[0], 1, height, width).astype("float32")
     # NORMALIZE DATA FROM [0, 255] TO [0, 1]
-    data_x = data_x / 255.0
-    data_x = data_x.permute(0,3,1,2) # ONLY SUPPORT `NHWC`
+    data_x_np = data_x / 255.0
+    data_x_tf = tf.convert_to_tensor(data_x_np, np.float32) # CONVERT NDARRAY TO TENSOR
+    data_x = data_x_tf.permute(0,3,1,2) # ONLY SUPPORT `NHWC`
     return data_x
 
 ### save & load model 的版本一定要一致
