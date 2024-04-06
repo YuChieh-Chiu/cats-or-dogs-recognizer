@@ -28,11 +28,6 @@
                             <div class="modal-body">                                
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
-                                        {% comment %} 
-                                        1. 以下區塊包含到上傳的元件，因此要加上 enctype="multipart/form-data" 
-                                        2. csrf_token 是 django 預設的表單驗證機制
-                                        {% endcomment %}
-                                        {{ form.image }}
                                     </div>
                                     <div class="form-group col-md-4">
                                     </div>
@@ -64,7 +59,7 @@
             </div>
             <div class="show-image shadow-lg border border-1 rounded-1">
                 {% comment %} 只設定 height，不設定 width，讓寬度自動按比例縮放 {% endcomment %}
-                <img src="{{ photo.image.url }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt />
+                <img src="{{ photo.image.path }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt />
             </div>
             <br>
         </div>
