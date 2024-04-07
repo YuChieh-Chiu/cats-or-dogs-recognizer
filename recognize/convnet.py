@@ -71,15 +71,20 @@ class convnets:
     def predict(self,
                 test_x,
                 model_path: str=model_path) -> str:
-        # LOAD PRETRAINED MODEL，LOADING KERAS IS BETTER
-        loaded_model = keras.models.load_model(os.path.join(model_path, "model.keras"))
-        # LOAD WEIGHTS INTO NEW MODEL
-        loaded_model.load_weights(os.path.join(model_path, "model_weights.h5"))
-        # GET MODEL PREDICTIONS
-        prediction = loaded_model.predict(test_x)
-        # SINCE PREDICTIONS ARE LIKE ONE-HOT ENCODED, CONVERT THEM TO LABELS
-        pred_id = np.argmax(prediction, axis=1)
-        print(pred_id)
+        try:
+            # LOAD PRETRAINED MODEL，LOADING KERAS IS BETTER
+            loaded_model = keras.models.load_model(os.path.join(model_path, "model.keras"))
+            # LOAD WEIGHTS INTO NEW MODEL
+            loaded_model.load_weights(os.path.join(model_path, "model_weights.h5"))
+        except:
+            print("LOAD MODEL FAILED.")
+        try:
+            # GET MODEL PREDICTIONS
+            prediction = loaded_model.predict(test_x)
+            # SINCE PREDICTIONS ARE LIKE ONE-HOT ENCODED, CONVERT THEM TO LABELS
+            pred_id = np.argmax(prediction, axis=1)
+        except:
+            print("PREDICT FAILED.")
         id2label = {1: "狗狗", 0: "貓咪"} #  SORT BY ALPHABET
         pred = id2label[pred_id[0]]
         return pred
