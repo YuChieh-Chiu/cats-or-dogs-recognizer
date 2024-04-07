@@ -58,7 +58,7 @@
             </div>
             <div class="show-image shadow-lg border border-1 rounded-1">
                 {% comment %} 只設定 height，不設定 width，讓寬度自動按比例縮放 {% endcomment %}
-                <img src="{{ photo.image.path }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt />
+                {% comment %} <img src="{{ photo.image.url }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt /> {% endcomment %}
             </div>
             <br>
         </div>
