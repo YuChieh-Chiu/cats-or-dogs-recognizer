@@ -62,8 +62,7 @@ def recognizer(request):
             photo = RecognizerLog.objects.last()
             train_x = train_y = valid_x = valid_y = np.zeros((2, 2))
             cats_and_dogs_recognizer = convnets(train_x, train_y, valid_x, valid_y)
-            print('>>>>> url:', photo.image.url)
-            test_x = preprocess_test_data(photo.image.url)
+            test_x = preprocess_test_data(photo.image.path)
             if test_x is None:
                 model_pred = "no prediction."
             else:
