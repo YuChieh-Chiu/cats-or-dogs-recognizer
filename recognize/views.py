@@ -60,18 +60,15 @@ def recognizer(request):
             form.save()
             # 模型判讀區塊
             photo = RecognizerLog.objects.last()
-            train_x = train_y = valid_x = valid_y = np.zeros((2, 2))
-            cats_and_dogs_recognizer = convnets(train_x, train_y, valid_x, valid_y)
-            print("INITIALIZE CONVNETS - DONE.")
-            test_x = preprocess_test_data(photo.image.url)
-            print("PREPROCESS TEST DATA - DONE.")
-            if test_x is None:
-                model_pred = "no prediction."
-            else:
-                model_pred = cats_and_dogs_recognizer.predict(test_x)
-                print("PREDICT - DONE.")
-            request.session["pred"] = model_pred # 模型預測的結果，存進 session 中，方便後面取用
-            print(request.session["pred"])
+            # train_x = train_y = valid_x = valid_y = np.zeros((2, 2))
+            # cats_and_dogs_recognizer = convnets(train_x, train_y, valid_x, valid_y)
+            # test_x = preprocess_test_data(photo.image.url)
+            # if test_x is None:
+            #     model_pred = "no prediction."
+            # else:
+            #     model_pred = cats_and_dogs_recognizer.predict(test_x)
+            # request.session["pred"] = model_pred # 模型預測的結果，存進 session 中，方便後面取用
+            request.session["pred"] = "狗狗"
             context = {
                 "pred": request.session["pred"],
                 "photo": photo,
