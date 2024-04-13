@@ -100,10 +100,10 @@
             </div>
         </div>
     </div>
-    <div class="dashboard-history">
-        <div class="card" style="padding-top: 20px;">
+    <div class="dashboard-history shadow-lg border border-1 rounded-1">
+        {% comment %} <div class="card" style="padding-top: 20px;"> {% endcomment %}
             <div class="h5 noto-sans-black" style="padding: 20px;">歷史紀錄</div>
-            <table class="table table-hover text-nowrap">
+            <table class="table table-hover text-nowrap table-responsive">
                 <thead>
                     <tr>
                         <th>＃</th>
@@ -180,7 +180,7 @@
                     </tr> {% endcomment %}
                 </tbody>
             </table>
-        </div>
+        {% comment %} </div> {% endcomment %}
     </div>
 </div>
 {% endblock %}
