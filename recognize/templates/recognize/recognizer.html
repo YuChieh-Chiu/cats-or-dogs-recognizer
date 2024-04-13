@@ -4,10 +4,6 @@
 {% block content %}
 <div class="container p-relative">
     <div class="row justify-content-center">
-        {% comment %} 
-        col-md-* 是該區塊佔幾個欄位寬
-        offset-md-* 是該區塊由左往右推幾個欄位寬 
-        {% endcomment %}
         <div class="col-md-7" align="center">
             <div class="upload-file">
                 {% comment %} 以下為彈出式視窗 {% endcomment %}
@@ -30,6 +26,8 @@
                                     <div class="form-group col-md-4">
                                         {{ form.image }}
                                     </div>
+                                    <div class="form-group col-md-4">
+                                    </div>
                                 </div>                                
                             </div>
                             <div class="modal-footer">
@@ -45,23 +43,39 @@
                 {% if pred == None %}
                     <h4>您上傳圖片，我猜圖片中的動物是貓咪還是狗狗</h4>
                 {% else %}
-                    {% comment %} 說明：以下區塊會在 request=POST 的時候顯示，但 button 的值只有在點擊、後台 request.POST.get 到時，才會更新資料表 {% endcomment %}
-                    <div class="d-flex justify-content-between">
-                        <h4>我猜圖片中的動物是一隻 <b>{{ pred }}</b>，我猜對了嗎？</h4>
+                    <div id="loading" class="d-flex" style="justify-content: center;">
+                        <div class="spinner-border text-warning ml-auto" role="status" aria-hidden="true"></div>
+                        <h4>&emsp;&emsp;模型辨識中，請稍候...</h4>
+                    </div>
+                    <div id="result" class="d-none justify-content-between">
+                        <h4>我猜圖片中的動物是一隻 <b id="predict_result"></b>，我猜對了嗎？</h4>
                         <form action="" enctype="multipart/form-data" method="POST">
                             {% csrf_token %}
                             <button class="answer-correct-btn bg-transparent" type="submit" name="correct" value="1"><i class="bi bi-check-circle-fill h3"></i></button>
                             <button class="answer-wrong-btn bg-transparent" type="submit" name="wrong" value="0"><i class="bi bi-x-circle-fill h3"></i></button>
                         </form>
                     </div>
-                {% endif %}
+                {% endif %}            
             </div>
             <div class="show-image shadow-lg border border-1 rounded-1">
-                {% comment %} 只設定 height，不設定 width，讓寬度自動按比例縮放 {% endcomment %}
-                {% comment %} <img src="{{ photo.image.url }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt /> {% endcomment %}
+                <img src="{{ photo.image.url }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt />
             </div>
             <br>
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "/recognize/result",
+        }).done(function(data){
+            $('#loading').remove();
+            $('#predict_result').append(data['pred']);
+            $('#result').removeClass('d-none');
+            $('#result').addClass('d-flex');
+        });
+    });
+</script>
 {% endblock %}
