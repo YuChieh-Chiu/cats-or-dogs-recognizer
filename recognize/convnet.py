@@ -43,8 +43,6 @@ def preprocess_test_data(test_data_path: str) -> pd.DataFrame:
     data_x = data_x.reshape(data_x.shape[0], 1, height, width).astype("float32")
     # NORMALIZE DATA FROM [0, 255] TO [0, 1]
     data_x_np = data_x / 255.0
-    data_x_tf = tf.convert_to_tensor(data_x_np, np.float32) # CONVERT NDARRAY TO TENSOR
-    data_x = data_x_tf.permute(0,3,1,2) # ONLY SUPPORT `NHWC`
     return data_x
 
 ### save & load model 的版本一定要一致
@@ -71,6 +69,9 @@ class convnets:
     def predict(self,
                 test_x,
                 model_path: str=model_path) -> str:
+        # SOLVE CPU VERSION ONLY SUPPORT `NHWC`
+        tf.keras.backend.set_image_data_format('channel_first')
+        test_x = np.moveaxis(test_x, 0, 2)
         try:
             # LOAD PRETRAINED MODEL，LOADING KERAS IS BETTER
             loaded_model = keras.models.load_model(os.path.join(model_path, "model.keras"))
