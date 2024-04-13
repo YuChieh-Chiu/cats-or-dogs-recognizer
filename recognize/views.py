@@ -1,33 +1,15 @@
+import json
 import numpy as np
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from .models import RecognizerLog
 from .forms import UploadImageForm
 from .convnet import convnets, preprocess_test_data
-from django.contrib.auth.decorators import login_required
 
 # 將上傳圖片的表單傳送至Django Template(樣板)來進行顯示
 @login_required(login_url="login")
 def recognizer(request):
-    """
-    一些資料庫抽象API語法跟SQL語法的對照
-    (1)
-    posts = Post.objects.all()
-    #SELECT * FROM posts_post
-    (2)
-    posts = Post.objects.filter(location="台南")
-    # SELECT * FROM posts_post WHERE location="台南"
-    (3)
-    posts = Post.objects.get(id=1)
-    # SELECT * FROM posts_post WHERE id=1
-    ----------
-    回傳Django Template的語法
-    render(
-        request,
-        template_name, # 樣板名稱 
-        context # 要帶入樣板的資料，以dict型態傳輸
-        )
-
-    """
     pred = None
     photo = RecognizerLog.objects.last() # 查詢最新一筆資料（讓前臺可以永遠顯示最新一筆）
     form = UploadImageForm()
@@ -58,19 +40,9 @@ def recognizer(request):
             return redirect("/recognize")
         if form.is_valid(): # 上傳圖片且圖片通過 django 預設 csrf 驗證
             form.save()
-            # 模型判讀區塊
             photo = RecognizerLog.objects.last()
-            # train_x = train_y = valid_x = valid_y = np.zeros((2, 2))
-            # cats_and_dogs_recognizer = convnets(train_x, train_y, valid_x, valid_y)
-            # test_x = preprocess_test_data(photo.image.url)
-            # if test_x is None:
-            #     model_pred = "no prediction."
-            # else:
-            #     model_pred = cats_and_dogs_recognizer.predict(test_x)
-            # request.session["pred"] = model_pred # 模型預測的結果，存進 session 中，方便後面取用
-            request.session["pred"] = "狗狗"
             context = {
-                "pred": request.session["pred"],
+                "pred": "loading",
                 "photo": photo,
                 "form": form
             }
@@ -81,3 +53,21 @@ def recognizer(request):
         "form": form
     }
     return render(request, "recognize/recognizer.html", context)
+
+@login_required(login_url="login")
+def ajax_model_predict(request):
+    # 模型判讀區塊
+    photo = RecognizerLog.objects.last()
+    train_x = train_y = valid_x = valid_y = np.zeros((2, 2))
+    cats_and_dogs_recognizer = convnets(train_x, train_y, valid_x, valid_y)
+    test_x = preprocess_test_data(photo.image.url)
+    if test_x is None:
+        model_pred = "None"
+    else:
+        model_pred = cats_and_dogs_recognizer.predict(test_x)
+    request.session["pred"] = model_pred # 模型預測的結果，存進 session 中，方便後面取用
+    context = {
+        "pred": request.session["pred"],
+    }
+    data = json.dumps(context)
+    return HttpResponse(data, content_type="application/json")
