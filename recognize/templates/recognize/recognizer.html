@@ -69,6 +69,7 @@
 <script>
     $("#submit_image").click(function(){
         $.ajax({
+            async: true,
             url: "/recognize/result",
         }).done(function(data){
             $('#loading').remove();
