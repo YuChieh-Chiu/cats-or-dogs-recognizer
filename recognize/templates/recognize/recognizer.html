@@ -32,7 +32,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="cancel-btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                                <input class="submit-btn btn-primary" type="submit" value="送出" />
+                                <input id="submit_image" class="submit-btn btn-primary" type="submit" value="送出" />
                             </div>
                         </div>
                         </div>
@@ -65,9 +65,9 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script>
-    $(document).ready(function(){
+    $("#submit_image").click(function(){
         $.ajax({
             url: "/recognize/result",
         }).done(function(data){
@@ -75,6 +75,7 @@
             $('#predict_result').append(data['pred']);
             $('#result').removeClass('d-none');
             $('#result').addClass('d-flex');
+            console.log("AJAX done")
         });
     });
 </script>
