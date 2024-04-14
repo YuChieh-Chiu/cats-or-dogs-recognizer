@@ -19,7 +19,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="uploadFileModalLabel">請在此上傳您的貓咪或狗狗圖片</h5>
-                                <input type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></input>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                             </div>
                             <div class="modal-body">                                
                                 <div class="form-row">
@@ -67,10 +67,11 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script>
-    $("#submit_image").click(function(){
+    $(document).on("click", "#submit_image", function(){
         $.ajax({
             async: true,
             url: "/recognize/result",
+            method: "POST",
         }).done(function(data){
             $('#loading').remove();
             $('#predict_result').append(data['pred']);
