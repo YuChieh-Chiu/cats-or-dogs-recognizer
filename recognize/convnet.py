@@ -84,8 +84,9 @@ class convnets:
             prediction = loaded_model.predict(test_x)
             # SINCE PREDICTIONS ARE LIKE ONE-HOT ENCODED, CONVERT THEM TO LABELS
             pred_id = np.argmax(prediction, axis=1)
-        except:
+        except Exception as e:
             print("PREDICT FAILED.")
+            print(e)
         id2label = {1: "狗狗", 0: "貓咪"} #  SORT BY ALPHABET
         pred = id2label[pred_id[0]]
         return pred
