@@ -71,7 +71,7 @@ class convnets:
                 model_path: str=model_path) -> str:
         # SOLVE CPU VERSION ONLY SUPPORT `NHWC`
         tf.keras.backend.set_image_data_format('channels_first')
-        test_x = np.moveaxis(test_x, 0, 2)
+        test_x = np.moveaxis(test_x, 2, 0)
         try:
             # LOAD PRETRAINED MODEL，LOADING KERAS IS BETTER
             loaded_model = keras.models.load_model(os.path.join(model_path, "model.keras"))
