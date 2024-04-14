@@ -8,9 +8,9 @@
             <div class="upload-file">
                 {% comment %} 以下為彈出式視窗 {% endcomment %}
                 {% comment %} Button trigger modal {% endcomment %}
-                <input type="button" class="btn btn-primary px-60" data-bs-toggle="modal" data-bs-target="#uploadFile">
+                <button type="button" class="btn btn-primary px-60" data-bs-toggle="modal" data-bs-target="#uploadFile">
                     ⬆ 上傳圖片
-                </input>
+                </button>
                 {% comment %} Modal {% endcomment %}
                 <div class="modal fade" id="uploadFile" tabindex="-1" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
                     <form action="" enctype="multipart/form-data" method="POST">
@@ -31,7 +31,7 @@
                                 </div>                                
                             </div>
                             <div class="modal-footer">
-                                <input type="button" class="cancel-btn btn-secondary" data-bs-dismiss="modal">關閉</input>
+                                <button type="button" class="cancel-btn btn-secondary" data-bs-dismiss="modal">關閉</button>
                                 <input class="submit-btn btn-primary" type="submit" value="送出" />
                             </div>
                         </div>
@@ -51,8 +51,8 @@
                         <h4>我猜圖片中的動物是一隻 <b id="predict_result"></b>，我猜對了嗎？</h4>
                         <form action="" enctype="multipart/form-data" method="POST">
                             {% csrf_token %}
-                            <input class="answer-correct-btn bg-transparent" type="submit" name="correct" value="1"><i class="bi bi-check-circle-fill h3"></i></input>
-                            <input class="answer-wrong-btn bg-transparent" type="submit" name="wrong" value="0"><i class="bi bi-x-circle-fill h3"></i></input>
+                            <button class="answer-correct-btn bg-transparent" type="submit" name="correct" value="1"><i class="bi bi-check-circle-fill h3"></i></button>
+                            <button class="answer-wrong-btn bg-transparent" type="submit" name="wrong" value="0"><i class="bi bi-x-circle-fill h3"></i></button>
                         </form>
                     </div>
                 {% endif %}            
