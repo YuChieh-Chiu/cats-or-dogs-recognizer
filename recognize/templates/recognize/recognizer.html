@@ -4,6 +4,10 @@
 {% block content %}
 <div class="container p-relative">
     <div class="row justify-content-center">
+        {% comment %} 
+        col-md-* 是該區塊佔幾個欄位寬
+        offset-md-* 是該區塊由左往右推幾個欄位寬 
+        {% endcomment %}
         <div class="col-md-7" align="center">
             <div class="upload-file">
                 {% comment %} 以下為彈出式視窗 {% endcomment %}
@@ -12,32 +16,6 @@
                     ⬆ 上傳圖片
                 </button>
                 {% comment %} Modal {% endcomment %}
-                <div class="modal fade" id="uploadFile" tabindex="-1" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
-                    <form action="" enctype="multipart/form-data" method="POST">
-                        {% csrf_token %}
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="uploadFileModalLabel">請在此上傳您的貓咪或狗狗圖片</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-                            </div>
-                            <div class="modal-body">                                
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        {{ form.image }}
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                    </div>
-                                </div>                                
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="cancel-btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                                <input id="submit_image" class="submit-btn btn-primary" type="submit" value="送出" />
-                            </div>
-                        </div>
-                        </div>
-                    </form>
-                </div>
             </div>
             <div class="prediction">
                 {% if pred == None %}
@@ -47,6 +25,7 @@
                         <div class="spinner-border text-warning ml-auto" role="status" aria-hidden="true"></div>
                         <h4>&emsp;&emsp;模型辨識中，請稍候...</h4>
                     </div>
+                    {% comment %} 說明：以下區塊會在 request=POST 後以 ajax 方式顯示，但 button 的值只有在點擊、後台 request.POST.get 到時，才會更新資料表 {% endcomment %}
                     <div id="result" class="d-none justify-content-between">
                         <h4>我猜圖片中的動物是一隻 <b id="predict_result"></b>，我猜對了嗎？</h4>
                         <form action="" enctype="multipart/form-data" method="POST">
@@ -58,6 +37,7 @@
                 {% endif %}            
             </div>
             <div class="show-image shadow-lg border border-1 rounded-1">
+                {% comment %} 只設定 height，不設定 width，讓寬度自動按比例縮放 {% endcomment %}
                 <img src="{{ photo.image.url }}" class="p-relative" height="400" style="left: 20px; right: 20px;" alt />
             </div>
             <br>
@@ -65,13 +45,43 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<div class="modal fade" id="uploadFile" tabindex="-1" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+    <form action="" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadFileModalLabel">請在此上傳您的貓咪或狗狗圖片</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <div class="modal-body">                                
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        {% comment %} 
+                        1. 以下區塊包含到上傳的元件，因此要加上 enctype="multipart/form-data" 
+                        2. csrf_token 是 django 預設的表單驗證機制
+                        {% endcomment %}
+                        {{ form.image }}
+                    </div>
+                    <div class="form-group col-md-4">
+                    </div>
+                </div>                                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                <input class="submit-btn btn-primary" name="done" type="submit" value="送出" />
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).on("click", "#submit_image", function(){
+    $("#uploadFile").appendTo("body");
+    $(document).ready(function(){
         $.ajax({
-            async: true,
             url: "/recognize/result",
-            method: "POST",
         }).done(function(data){
             $('#loading').remove();
             $('#predict_result').append(data['pred']);
