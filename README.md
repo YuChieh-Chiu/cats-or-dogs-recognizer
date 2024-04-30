@@ -3,16 +3,16 @@
 > ![cmd-svg](./readme_source/terminal-fill.svg) `Django` + ![gear-svg](./readme_source/gear-wide-connected.svg) `Convnets` = ![window-svg](./readme_source/window-fullscreen.svg) `Cats or Dogs Recognizer Website`
 
 ## Website Display
-### Login
+### - Login
 <img width="400" src="./readme_source/login_page.png">
 
-### Homepage
+### - Homepage
 <img width="400" src="./readme_source/homepage_page.gif">
 
-### Recognize
+### - Recognize
 <img width="400" src="./readme_source/recognize_page.gif">
 
-### History & Metrics
+### - History & Metrics
 <img width="400" src="./readme_source/dashboard_page.png">
 
 ## Project Overview
