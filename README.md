@@ -4,7 +4,7 @@
 
 ##
 ### Login
-<img width="1440" height="820" src="./readme_source/login_page.png">
+<img width="600" src="./readme_source/login_page.png">
 ### Homepage
 ![homepage_page](./readme_source/homepage_page.gif)
 ### Recognize
