@@ -2,7 +2,7 @@
 
 > ![cmd-svg](./readme_source/terminal-fill.svg) `Django` + ![gear-svg](./readme_source/gear-wide-connected.svg) `Convnets` = ![window-svg](./readme_source/window-fullscreen.svg) `Cats or Dogs Recognizer Website`
 
-##
+## Website Display
 ### Login
 <img width="400" src="./readme_source/login_page.png">
 
@@ -10,9 +10,10 @@
 <img width="400" src="./readme_source/homepage_page.gif">
 
 ### Recognize
-![recognize_page](./readme_source/recognize_page.gif)
+<img width="400" src="./readme_source/recognize_page.gif">
+
 ### History & Metrics
-![dashboard_page](./readme_source/dashboard_page.png)
+<img width="400" src="./readme_source/dashboard_page.png">
 
 ## Project Overview
 > [!IMPORTANT]
