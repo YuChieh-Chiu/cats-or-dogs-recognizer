@@ -18,5 +18,6 @@ The website collects all user feedback history and presents the current model's 
 > This is a `Convnets` model **trained on a balanced dataset of approximately 8,000 cat photos and 8,000 dog photos**. 
 The model consists of a total of eighteen layers, including the **Input Layer, Data Augmentation Layer, BatchNormalization Layer, Conv2D Layer, MaxPool2D Layer, Dropout Layer, Flatten Layer, and Dense Layer**.
 
+## Note
 > [!NOTE]
 > This project can only run in `GPU supported` environment, since the Convnets model used in this project is in data_type `NCHW`, but the `CPU only` environment can only support data_type `NHWC`.
