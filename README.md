@@ -4,9 +4,11 @@
 
 ##
 ### Login
-<img width="600" src="./readme_source/login_page.png">
+<img width="400" src="./readme_source/login_page.png">
+
 ### Homepage
-![homepage_page](./readme_source/homepage_page.gif)
+<img width="400" src="./readme_source/homepage_page.gif">
+
 ### Recognize
 ![recognize_page](./readme_source/recognize_page.gif)
 ### History & Metrics
