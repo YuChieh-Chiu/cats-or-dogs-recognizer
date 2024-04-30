@@ -1,8 +1,8 @@
-CATS OR DOGS RECOGNIZER
+# CATS OR DOGS RECOGNIZER
 
 > ![cmd-svg](./readme_source/terminal-fill.svg) `Django` + ![gear-svg](./readme_source/gear-wide-connected.svg) `Convnets` + ![cloud-svg](./readme_source/cloud-check-fill.svg) `Render` = ![window-svg](./readme_source/window-fullscreen.svg) `Cats or Dogs Recognizer Website`
 
-# Project Overview
+## Project Overview
 > [!IMPORTANT]
 > In this project, I have developed a website based on the `Django` framework to demonstrate my `Convolutional Neural Network` model.
 ```
@@ -12,7 +12,7 @@ Afterwards, users can provide feedback indicating whether the identification res
 The website collects all user feedback history and presents the current model's accuracy and recall rates for identifying cats and dogs separately.
 ```
 
-# Model Overview
+## Model Overview
 > [!IMPORTANT]
 > After validation using around 2,000 cat photos and 2,000 dog photos, **the accuracy of the model is approximately 92%**.
 ```
