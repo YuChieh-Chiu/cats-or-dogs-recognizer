@@ -1,14 +1,14 @@
 Brotli==1.1.0
 dj-database-url==2.1.0
 Django==5.0.7
-gunicorn==21.2.0
+gunicorn==22.0.0
 keras==2.15.0
 numpy==1.26.4
 opencv-python==4.9.0.80
 pandas==2.2.1
-pillow==10.2.0
+pillow==10.3.0
 psycopg2-binary==2.9.9
-requests==2.31.0
+requests==2.32.0
 uvicorn==0.29.0
 whitenoise==6.6.0
 tensorflow==2.15.0
